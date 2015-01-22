@@ -1,0 +1,79 @@
+﻿@model Presentation.Web.Models.HomeTestingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <button class="btn btn-default" data-toggle="modal" data-target="#uploadModal">
+        Upload
+    </button>
+</div>
+<br />
+
+Total : @Model.Questions.Count
+
+<style>
+    .question-text .table {
+        border: 1px #ddd solid;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .question-answer ul {
+        padding-left: 0;
+        list-style: none;
+    }
+</style>
+
+@foreach (var question in Model.Questions)
+{
+     <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="label label-primary">@question.Discipline.Name</span>
+            <span>@Html.Raw(question.Text)</span>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled answers">
+                @foreach (var answer in question.Correct)
+                {
+                    <li>
+                        <span class="label label-success">Верно</span>
+                        <span class="text-success">@Html.Raw(answer.Text)</span>
+                    </li>
+                }
+                @foreach (var answer in question.Wrong)
+                {
+                    <li>
+                        <span class="label label-danger">Неверно</span>
+                        <span class="text-danger">@Html.Raw(answer.Text)</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="uploadModal" tabindex="6" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("Test", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horisontal", @role = "form" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Загрузка файлов</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="postedFiles">Файлы:</label>
+                        <input type="file" name="postedFiles" multiple="true" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model Presentation.Web.Models.HomeIndexViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Статистика
+    </div>
+    <div class="panel-body">
+        <ul class="list-inline">
+            <li>Дисциплины: @Model.TotalDisciplines</li>
+            <li>Вопросы: @Model.TotalQuestions</li>
+            <li>Ответы: @Model.TotalAnswers</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    @{
+        const int cols = 3;
+        double total = Model.TotalDisciplines;
+        var itemsOnPage = (int)Math.Ceiling(total / cols);
+    }
+    @for (var i = 0; i < cols; i++)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <ul class="list-unstyled">
+                @foreach (var discipline in Model.Disciplines.Skip(i * itemsOnPage).Take(itemsOnPage))
+                {
+                    <li>
+                        <span class="label label-info">@discipline.Questions.Count()</span>
+                        <a href="@Url.Action("Discipline", "Home", new { id = discipline.Id })">
+                            @discipline.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

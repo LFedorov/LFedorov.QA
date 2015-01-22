@@ -1,0 +1,33 @@
+﻿@model Presentation.Web.Models.HomeLoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="panel panel-default panel-login">
+            <div class="panel-heading text-center">Sign In to Your Account</div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email", @required = "true", @autofocus = "" })
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @required = "true" })
+
+                    <button class="btn btn-primary pull-right" type="submit">Sign In ></button>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

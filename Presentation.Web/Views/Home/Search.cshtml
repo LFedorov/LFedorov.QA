@@ -1,0 +1,34 @@
+﻿@model Presentation.Web.Models.HomeSearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Результаты для "@Model.SearchQuery"</h2>
+
+@foreach (var question in Model.Questions)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="label label-primary">@question.Discipline.Name</span>
+            <span>@Html.Raw(question.Text)</span>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled answers">
+                @foreach (var answer in question.Correct)
+                {
+                    <li>
+                        <span class="label label-success">Верно</span>
+                        <span class="text-success">@Html.Raw(answer.Text)</span>
+                    </li>
+                }
+                @foreach (var answer in question.Wrong)
+                {
+                    <li>
+                        <span class="label label-danger">Неверно</span>
+                        <span class="text-danger">@Html.Raw(answer.Text)</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

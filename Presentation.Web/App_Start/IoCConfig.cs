@@ -16,12 +16,8 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Maps;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using Presentation.Web.Controllers;
-using Presentation.Web.Models;
 
 namespace Presentation.Web
 {

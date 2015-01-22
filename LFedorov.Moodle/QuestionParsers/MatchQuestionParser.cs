@@ -11,21 +11,17 @@ namespace LFedorov.Moodle.QuestionParsers
             var questionText = "";
             Tuple<Answer, bool> questionAnswer = null;
 
-            //Получаем блок содержимого вопроса
             var questionContentNode = questionNode.SelectSingleNode("./div[@class='content']");
             if (questionContentNode != null)
             {
-                //Получаем блок текста вопроса
                 var questionTextNode = questionContentNode.SelectSingleNode("./div[@class='qtext']");
                 if (questionTextNode != null)
                 {
-                    //Получаем текст вопроса
                     questionText = GetQuestionText(questionTextNode);
                 }
 
-                //Получаем блок ответов вопроса
                 var answersNode = questionContentNode.SelectSingleNode("./div[@class='ablock clearfix']/table[@class='answer']");
-                //Получаем блок оценки ответов вопроса
+                
                 var gradingNode = questionContentNode.SelectSingleNode("./div[@class='grading']");
                 if (answersNode != null && gradingNode != null)
                 {
@@ -33,7 +29,6 @@ namespace LFedorov.Moodle.QuestionParsers
                 }
             }
 
-            //var question = new Question(questionText, questionImage);
             var question = new Question(questionText);
 
             if (questionAnswer != null && questionAnswer.Item1 != null)

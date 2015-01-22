@@ -9,25 +9,19 @@ namespace LFedorov.Moodle.QuestionParsers
         public override Question GetQuestionFromNode(HtmlNode questionNode)
         {
             var questionText = "";
-            var questionImage = "";
             Tuple<Answer, bool> questionAnswer = null;
 
-            //Получаем блок содержимого вопроса
             var questionContentNode = questionNode.SelectSingleNode("./div[@class='content']");
             if (questionContentNode != null)
             {
-                //Получаем блок текста вопроса
                 var questionTextNode = questionContentNode.SelectSingleNode("./div[@class='qtext']");
                 if (questionTextNode != null)
                 {
-                    //Получаем текст вопроса
                     questionText = GetQuestionText(questionTextNode);
 
-                    //Получаем картинку вопроса
-                    questionImage = GetQuestionImage(questionTextNode);
+                    GetQuestionImage(questionTextNode);
                 }
 
-                //Получаем блок ответов вопроса
                 var answersNode = questionContentNode.SelectSingleNode("./div[@class='ablock clearfix']/div[@class='answer']");
                 if (answersNode != null)
                 {
@@ -35,7 +29,6 @@ namespace LFedorov.Moodle.QuestionParsers
                 }
             }
 
-            //var question = new Question(questionText, questionImage);
             var question = new Question(questionText);
             if (questionAnswer != null && questionAnswer.Item1 != null)
             {
@@ -65,9 +58,7 @@ namespace LFedorov.Moodle.QuestionParsers
 
         private string GetQuestionImage(HtmlNode questionTextNode)
         {
-            //Получаем блок картинки вопроса
             var questionImageNode = questionTextNode != null ? questionTextNode.SelectSingleNode("./a/img") : null;
-            //Получаем ссылку на картинку
             var questionImage = questionImageNode != null ? questionImageNode.Attributes["src"].Value : "";
             return questionImage;
         }

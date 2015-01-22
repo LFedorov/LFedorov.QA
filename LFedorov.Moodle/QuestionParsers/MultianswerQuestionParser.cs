@@ -13,14 +13,10 @@ namespace LFedorov.Moodle.QuestionParsers
             Tuple<Answer, bool> questionAnswer = null;
             //var questionAnswers = new Dictionary<Answer, bool>();
 
-            //Получаем блок содержимого вопроса
             var questionContentNode = questionNode.SelectSingleNode("./div[@class='content']");
             if (questionContentNode != null)
             {
-                //Получаем текст вопроса
                 questionText = GetQuestionText(questionContentNode);
-
-                //Получаем ответы на вопрос
                 questionAnswer = GetQuestionAnswers(questionContentNode);
             }
 

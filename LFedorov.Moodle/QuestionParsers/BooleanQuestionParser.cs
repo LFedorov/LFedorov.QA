@@ -11,19 +11,15 @@ namespace LFedorov.Moodle.QuestionParsers
             var questionText = "";
             var questionAnswers = new Dictionary<Answer, bool>();
 
-            //Получаем блок содержимого вопроса
             var questionContentNode = questionNode.SelectSingleNode("./div[@class='content']");
             if (questionContentNode != null)
             {
-                //Получаем блок текста вопроса
                 var questionTextNode = questionContentNode.SelectSingleNode("./div[@class='qtext']");
                 if (questionTextNode != null)
                 {
-                    //Получаем текст вопроса
                     questionText = GetQuestionText(questionTextNode);
                 }
 
-                //Получаем блок ответов вопроса
                 var answersNode = questionContentNode.SelectSingleNode("./div[@class='ablock clearfix']/div[@class='answer']");
                 if (answersNode != null)
                 {
@@ -31,23 +27,18 @@ namespace LFedorov.Moodle.QuestionParsers
                 }
             }
 
-            //Из полученных данных создаем новый вопрос
-            //var question = new Question(questionText, questionImage);
             var question = new Question(questionText);
 
-            //Добавляем полученные ответы в вопрос
             foreach (var questionAnswer in questionAnswers)
             {
                 question.AddAnswer(questionAnswer.Key, questionAnswer.Value);
             }
 
-            //Возвращаем полученный вопрос
             return question;
         }
 
         private string GetQuestionText(HtmlNode questionTextNode)
         {
-            //Получаем текст вопроса
             var questionText = questionTextNode.InnerHtml.Trim();
             return questionText;
         }
@@ -73,7 +64,6 @@ namespace LFedorov.Moodle.QuestionParsers
                     {
                         var answerIsCorrect = answerCorrectnessNode.Attributes["alt"].Value == "Верно";
 
-                        //var answer = new Answer(answerText, answerImage);
                         var answer = new Answer(answerText);
                         answers.Add(answer, answerIsCorrect);
                     }

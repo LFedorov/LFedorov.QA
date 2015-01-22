@@ -11,19 +11,16 @@ namespace LFedorov.Moodle.QuestionParsers
             var questionText = "";
             var questionAnswers = new Dictionary<Answer, bool>();
 
-            //Получаем блок содержимого вопроса
             var questionContentNode = questionNode.SelectSingleNode("./div[@class='content']");
 
             if (questionContentNode != null)
             {
-                //Получаем блок текста вопроса
                 var questionTextNode = questionContentNode.SelectSingleNode("./div[@class='qtext']");
                 if (questionTextNode != null)
                 {
                     questionText = GetQuestionText(questionTextNode);
                 }
 
-                //Получаем блок ответов вопроса
                 var answersNode = questionContentNode.SelectSingleNode("./div[@class='ablock clearfix']/table[@class='answer']");
                 if (answersNode != null)
                 {
@@ -31,16 +28,13 @@ namespace LFedorov.Moodle.QuestionParsers
                 }
             }
 
-            //Из полученных данных создаем новый вопрос
             var question = new Question(questionText);
 
-            //Добавляем полученные ответы в вопрос
             foreach (var questionAnswer in questionAnswers)
             {
                 question.AddAnswer(questionAnswer.Key, questionAnswer.Value);
             }
 
-            //Возвращаем полученный вопрос
             return question;
         }
 

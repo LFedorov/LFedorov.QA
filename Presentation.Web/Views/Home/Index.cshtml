@@ -2,17 +2,59 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Статистика
+<div class="page-header">
+    <h2>
+        <i class="fa fa-fw fa-bar-chart"></i>
+        <span>Статистика</span>
+    </h2>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12 info-box">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">@Model.TotalAccounts</h3>
+            </div>
+            <div class="panel-body text-center">
+                <strong>Пользователи</strong>
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-        <ul class="list-inline">
-            <li>Дисциплины: @Model.TotalDisciplines</li>
-            <li>Вопросы: @Model.TotalQuestions</li>
-            <li>Ответы: @Model.TotalAnswers</li>
-        </ul>
+    <div class="col-md-3 col-sm-6 col-xs-12 info-box">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">@Model.TotalDisciplines</h3>
+            </div>
+            <div class="panel-body text-center">
+                <strong>Предметы</strong>
+            </div>
+        </div>
     </div>
+    <div class="col-md-3 col-sm-6 col-xs-12 info-box">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">@Model.TotalQuestions</h3>
+            </div>
+            <div class="panel-body text-center">
+                <strong>Вопросы</strong>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12 info-box">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">@Model.TotalAnswers</h3>
+            </div>
+            <div class="panel-body text-center">
+                <strong>Ответы</strong>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-header">
+    <h2>
+        <i class="fa fa-fw fa-graduation-cap"></i>
+        <span>Дисциплины</span>
+    </h2>
 </div>
 <div class="row">
     @{
@@ -23,11 +65,11 @@
     @for (var i = 0; i < cols; i++)
     {
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled disciplines-list">
                 @foreach (var discipline in Model.Disciplines.Skip(i * itemsOnPage).Take(itemsOnPage))
                 {
                     <li>
-                        <span class="label label-info">@discipline.Questions.Count()</span>
+                        <span class="label label-info pull-right">@discipline.Questions.Count()</span>
                         <a href="@Url.Action("Discipline", "Home", new { id = discipline.Id })">
                             @discipline.Name
                         </a>

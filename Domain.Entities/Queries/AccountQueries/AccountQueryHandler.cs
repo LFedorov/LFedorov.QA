@@ -4,7 +4,8 @@ using Domain.Common.Query;
 namespace Domain.Entities.Queries.AccountQueries
 {
     public class AccountQueryHandler :
-        IQueryHandler<AccountVerificationQuery, Account>
+        IQueryHandler<AccountVerificationQuery, Account>,
+        IQueryHandler<AccountsCountQuery, int>
     {
         private readonly IRepository _repository;
 
@@ -25,6 +26,11 @@ namespace Domain.Entities.Queries.AccountQueries
             }
             
             return null;
+        }
+
+        public int Execute(AccountsCountQuery query)
+        {
+            return _repository.Query<Account>().Count();
         }
     }
 }

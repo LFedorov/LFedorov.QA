@@ -1,4 +1,13 @@
-﻿.form-search {
+﻿@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=cyrillic-ext,latin);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext,latin);
+
+body {
+    padding-bottom: 100px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form-search {
     padding-top: 14px;
 }
 
@@ -9,3 +18,37 @@
 .answers ul {
     list-style: none;
 }
+
+.disciplines-list li {
+    margin: 4px 0;
+}
+
+.disciplines-list li .label {
+    margin-top: 2px;
+}
+
+/* Bootstrap Overrides */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.page-header {
+    margin: 10px 0;
+}
+
+/* Info Box */
+.info-box {
+    font-family: 'Open Sans', sans-serif;
+}
+
+    .info-box .panel-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 72px;
+        font-weight: bold;
+        color: #fff;
+        line-height: 45px;
+        padding-top: 20px;
+        letter-spacing: -0.8px;
+    }

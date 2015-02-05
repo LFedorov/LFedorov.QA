@@ -38,6 +38,7 @@ namespace Presentation.Web.Controllers
 
             var viewModel = new HomeIndexViewModel
             {
+                TotalAccounts = _queryDispatcher.Ask(new AccountsCountQuery()),
                 TotalDisciplines = _queryDispatcher.Ask(new DisciplinesCountQuery()),
                 TotalQuestions = _queryDispatcher.Ask(new QuestionsCountQuery()),
                 TotalAnswers = _queryDispatcher.Ask(new AnswersCountQuery()),

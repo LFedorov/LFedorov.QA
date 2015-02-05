@@ -11,6 +11,7 @@ namespace Presentation.Web.Models
             Disciplines = new List<Discipline>();
         }
 
+        public int TotalAccounts { get; set; }
         public int TotalDisciplines { get; set; }
         public int TotalQuestions { get; set; }
         public int TotalAnswers { get; set; }
